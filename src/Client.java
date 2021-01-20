@@ -17,11 +17,14 @@ public class Client {
 				throws UnknownHostException, IOException {
 			
 			Socket client = new Socket("127.0.0.1", 12345);
-			System.out.println("O cliente se conectou ao servidor!");
+			System.out.println("Conectado ao servidor");
 			
 			Scanner teclado = new Scanner(System.in);
-		
+			Scanner chat = new Scanner(client.getInputStream());
 			PrintStream saida = new PrintStream(client.getOutputStream());
+			
+			
+			
 			
 			OutputStream arquivo = new FileOutputStream("arquivon.txt");
 			OutputStreamWriter arquivow = new OutputStreamWriter(arquivo);
@@ -38,11 +41,17 @@ public class Client {
 				saida.println(bLendo.readLine());	
 			}
 			
+			while(chat.hasNextLine()) {
+				//saida.println(bLendo.readLine());
+				System.out.println(chat);
+			}
+			
 			noArquivo.close();
 			saida.close();
 			bArquivo.close();
 			teclado.close();
 			bLendo.close();
 		}
-}
+	
+	}
 
